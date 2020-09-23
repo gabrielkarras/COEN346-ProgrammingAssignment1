@@ -34,8 +34,6 @@ Assume that there is a series of light bulbs connected in a sequential manner. I
 	  4. Each recursive branch becomes a thread
 	  5. Must count the total number of threads
 	  6. Shared data must be Synchronized
-      1. The input array while searching
-      2. The thread counter
-      3. The array of defectives
-	  7. Whenever traversal finds a defective bulb, it must log the element index into another array
+      		1. The array of defectives	
+	  7. Whenever traversal finds a defective bulb, it must log the element index into another array(defectives)
  3. Must output the content of defective array(indexes of defective light bulbs) and the total number of threads FindDefective used.
