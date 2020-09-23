@@ -1,3 +1,5 @@
+**Note** : Input files("input.txt" and "input2.txt") must be a level higher(in terms folders) to be processed by main program
+
 # **Binary Tree Traversal to Find Defective Light Bulbs using  Multi-Threading** #
 
 Assume that there is a series of light bulbs connected in a sequential manner. In this situation, if one of the bulbs is defective it will cause all the bulbs to be off. A potential solution to find quickly the faulty bulb(s) is to divide recursively the series into sub-series and keep investigating the sub-series that do not show light. We assume the sub-series with no faulty bulb(s) will show light. 
