@@ -1,22 +1,51 @@
+/*
+    Course: COEN 346 Programming Assignment 1
+    Professor: B.Goodarzi
+    Date: 23/09/2020
+    Author(s): Gabriel Karras - 40036341
+               Alexia Capitina - (insert Id)
+    Due Date: 03/10/2020
+
+    Title: Binary tree traversal to find defective light bulbs using  multi-threading
+    Problem:
+        Assume that there is a series of light bulbs connected in a sequential manner.
+        In this situation, if one of the bulbs is defective it will cause all the bulbs to be off.
+        A potential solution to find quickly the faulty bulb(s) is to divide recursively the series into sub series and
+        keep investigating the sub series that do not show light.
+        We assume the sub series with no faulty bulb(s) will show light.
+ */
+
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class AssignmentMain {
+
 
     public static void main(String[] args) throws Exception {
 
+        // Input
         String f1 = "input.txt";
         String f2 = "input2.txt";
 
         int[] entry1 = ReadFile(f1);
         int[] entry2 = ReadFile(f2);
 
-
+        System.out.println("\ninput.txt");
         System.out.print(Arrays.toString(entry1));
+        System.out.println("\ninput2.txt");
         System.out.print(Arrays.toString(entry2));
+
+        // Find Defective Light Bulbs
+        //FindDefectives();
+
+        // Output
+        System.out.println("\nOutput:");
     }
+
 
     /**
      * Accepts an input file in which the first digit represents the size of the array and
@@ -51,4 +80,5 @@ public class AssignmentMain {
 
         return entries;
     }
+
 }
