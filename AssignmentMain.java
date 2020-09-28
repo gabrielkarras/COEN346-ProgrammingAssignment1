@@ -19,11 +19,10 @@
 /*
     Imported Libraries
  */
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -34,29 +33,32 @@ public class AssignmentMain{
 
         // Input
         String f1 = "input.txt";
-        String f2 = "input2.txt";
+        // String f2 = "input2.txt";
 
         int[] entry1 = ReadFile(f1);
-        int[] entry2 = ReadFile(f2);
+        // int[] entry2 = ReadFile(f2);
 
         System.out.println("\ninput.txt");
         System.out.print(Arrays.toString(entry1));
-        System.out.println("\ninput2.txt");
-        System.out.print(Arrays.toString(entry2));
+        // System.out.println("\ninput2.txt");
+        // System.out.print(Arrays.toString(entry2));
 
 
         // Find Defective Light Bulbs
-        /*FindDefectives();
         try{
+            FindDefective search = new FindDefective(entry1, 0, entry1.length);
+            search.start();
+            search.join();
+
+            // Output
+            System.out.println("\nSystem thread counter: " + Thread.activeCount());
+            System.out.println("\nDefective bulbs are: " + search.getDefectives());
+            System.out.println("\nThe number of threads for this problem is " + search.getCounter() ) ;
 
         }
         catch(Exception e){
-
+            e.getStackTrace();
         }
-        */
-
-        // Output
-        System.out.println("\nOutput:");
     }
 
 
