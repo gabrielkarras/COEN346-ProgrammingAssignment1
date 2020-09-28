@@ -39,7 +39,7 @@ public class AssignmentMain{
         // int[] entry2 = ReadFile(f2);
 
         System.out.println("\ninput.txt");
-        System.out.print(Arrays.toString(entry1));
+        System.out.println(Arrays.toString(entry1));
         // System.out.println("\ninput2.txt");
         // System.out.print(Arrays.toString(entry2));
 
@@ -52,8 +52,8 @@ public class AssignmentMain{
 
             // Output
             System.out.println("\nSystem thread counter: " + Thread.activeCount());
-            System.out.println("\nDefective bulbs are: " + search.getDefectives());
-            System.out.println("\nThe number of threads for this problem is " + search.getCounter() ) ;
+            search.printDefectives();
+            search.printCounter();
 
         }
         catch(Exception e){

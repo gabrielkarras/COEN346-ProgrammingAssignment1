@@ -1,4 +1,3 @@
-import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +94,7 @@ public class FindDefective extends Thread {
      */
     public void printCounter()
     {
-        System.out.println("Current Thread Count: " + this.threadCount);
+        System.out.println("The number of threads for this problem is " + this.threadCount);
     }
 
     /**
