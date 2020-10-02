@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FindDefective extends Thread {
+
 
     private int low; // lower limit of array
     private int high; // higher limit of array
     private int[] array; // array of light bulbs
-    public int threadCount; // Records total number of threads in program
-    List<Integer> defectives = new ArrayList<Integer>(); // Dynamic(Re-sizeable) array of integers
+    static int threadCount = 1; // Records total number of threads in program
+    static List<Integer> defectives = new ArrayList<Integer>(); // Dynamic(Re-sizeable) array of integers
 
 
     /**
-     * Constructor for defective light bulbs
+     * Find Defective Constructor
      * @param array of lightbulbs
      * @param low lower limit of passed array
      * @param high upper limit of passed array
@@ -22,6 +24,7 @@ public class FindDefective extends Thread {
         this.low = low;
         this.high = high;
     }
+
 
     /**
      *  As long as our lower limit doesn't cross our upper limit(this means the array is of size 0)
@@ -34,33 +37,58 @@ public class FindDefective extends Thread {
      */
     @Override
     public void run() {
-        if( high >= low ){
-            int mid = (high + low)/2; // index of middle entry
 
-            if(mid == 0){
-                logDefective(mid);
+        int mid = (high + low)/2; // index of middle entry
+        if ( !lighting(array, low, high)) { // We proceed with search when there's is still no lighting
+
+            // Verifying that our high and low pointers don't cross, otherwise keep searching
+            if( high > low ){
+
+                // Search the array by dividing into two sub-array (2 threads)
+                // Creating left thread
+                FindDefective tleft = new FindDefective(array, low, mid);
+                increaseCounter();
+                // Creating right thread
+                FindDefective tright = new FindDefective(array, mid + 1, high);
+                increaseCounter();
+
+                tleft.start();
+                tright.start();
+
+                try {
+                    tleft.join();
+                    tright.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-
-            FindDefective tleft = new FindDefective(array, low, mid - 1);
-            FindDefective tright = new FindDefective(array, mid + 1, high);
-            tleft.start();
-            increaseCounter();
-            tright.start();
-            increaseCounter();
-
-            try {
-                tleft.join();
-                tright.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            else {
+                // Verify if the array value is 0. If yes, log that position in the array list
+                if (array[mid] == 0 ) {
+                    logDefective(mid+1) ;
+                }
             }
         }
-        else{
-            // do nothing
-        }
-
     }
 
+
+    /**
+     * Searches throughout the given array for defective lightbulbs.
+     * If it finds defective lightbulbs it will return False
+     * Otherwise, it will return True
+     * @param array of lightbulbs
+     * @param low pointer to current lower limit of search within the array
+     * @param high pointer to current upper limit of search within the array
+     * @return False if we find a defective lightbulb within the array, otherwise True
+     */
+    public boolean lighting(int []array, int low,int high){
+        for (int i =low; i<=high;i++){
+            if (array[i] == 0){
+                return false;
+            }
+        }
+        return true;
+    }
 
     /* Getter and Setter methods */
     /**
@@ -70,6 +98,27 @@ public class FindDefective extends Thread {
     public synchronized void logDefective(int index)
     {
         this.defectives.add(index);
+    }
+
+    /**
+     * Returns array of defectives
+     */
+    public List<Integer> getDefectives()
+    {
+        return this.defectives;
+    }
+
+    /**
+     * Prints array of defectives
+     */
+    public void printDefectives()
+    {
+        System.out.println("Defective bulbs are: " + defectives.toString());
+    }
+
+    public void resetDefectives()
+    {
+        this.defectives.clear();
     }
 
     /**
@@ -98,15 +147,11 @@ public class FindDefective extends Thread {
     }
 
     /**
-     * Returns array of defectives
+     * Resets thread counter back to 1 (this includes the main thread)
      */
-    public List<Integer> getDefectives()
+    public void resetCounter()
     {
-        return this.defectives;
+        threadCount = 1;
     }
 
-    public void printDefectives()
-    {
-        System.out.println("Defective bulbs are: " + defectives.toString());
-    }
 }
